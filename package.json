@@ -1,17 +1,17 @@
 {
   "name": "printerfacts",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Service",
   "author": "xena <me@christine.website>",
   "main": "f/main/index.js",
   "dependencies": {
     "random-item": "^1.0.0"
   },
-  "private": true,
+  "private": false,
   "stdlib": {
     "name": "xena/printerfacts",
     "defaultFunction": "main",
     "timeout": 10000,
-    "publish": false
+    "publish": true
   }
 }
