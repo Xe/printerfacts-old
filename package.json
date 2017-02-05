@@ -1,7 +1,7 @@
 {
   "name": "printerfacts",
-  "version": "0.0.5",
-  "description": "Service",
+  "version": "0.1.0",
+  "description": "A stdlib service for informative/educational facts about printers",
   "author": "xena <me@christine.website>",
   "main": "f/main/index.js",
   "dependencies": {
