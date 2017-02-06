@@ -49,6 +49,6 @@ module.exports = (params, callback) => {
             callback(err);
         }
 
-        callback(null, mustache.render(htmlTemplate, {fact: result.facts[0]}));
+        callback(null, new Buffer(mustache.render(htmlTemplate, {fact: result.facts[0]})));
     });
 };
