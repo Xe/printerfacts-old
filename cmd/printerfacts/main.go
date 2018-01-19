@@ -67,6 +67,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.Handle(proto.PrinterfactsPathPrefix, handler)
+	mux.Handle("/", http.FileServer(sfs))
 
 	ln.Log(ctx, ln.F{"port": os.Getenv("PORT")}, ln.Action("Listening on http"))
 	ln.FatalErr(ctx, http.ListenAndServe(":"+os.Getenv("PORT"), metaInfo(mux)), ln.Action("http server stopped for some reason"))
