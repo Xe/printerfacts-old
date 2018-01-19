@@ -5,6 +5,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -32,6 +33,12 @@ func Generate() {
 	defer cancel()
 
 	mg.Deps(Tools)
+
+	if Contained() {
+		p := os.Getenv("PATH") + ":/root/go/bin"
+		log.Printf("setting path to %s", p)
+		os.Setenv("PATH", p)
+	}
 
 	shouldWork(ctx, nil, wd, "statik", "-src", "./facts", "-f")
 	shouldWork(ctx, nil, filepath.Join(wd, "proto"), "sh", "./regen.sh")
