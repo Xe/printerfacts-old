@@ -12,6 +12,7 @@ import (
 	"github.com/magefile/mage/mg"
 )
 
+// Tools installs all of the needed tools for printerfacts.
 func Tools() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -28,6 +29,7 @@ func Tools() {
 	}
 }
 
+// Generate runs all relevant code generation tasks.
 func Generate() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -45,6 +47,7 @@ func Generate() {
 	fmt.Println("reran code generation")
 }
 
+// Build creates a binary of printerfacts and pfact in a new directory named bin
 func Build() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -61,6 +64,7 @@ func Build() {
 	}
 }
 
+// Docker creates the docker image xena/printerfacts with the printerfacts server.
 func Docker() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -68,11 +72,10 @@ func Docker() {
 	shouldWork(ctx, nil, wd, "docker", "build", "-t", "xena/printerfacts", ".")
 }
 
+// Heroku deploys this to the heroku app printerfacts.
 func Heroku() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-
-	mg.Deps(Docker)
 
 	shouldWork(ctx, nil, wd, "heroku", "container:push", "-a", "printerfacts", "web")
 }
