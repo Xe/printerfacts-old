@@ -19,6 +19,15 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/heroku/x"
+  packages = [
+    "hmetrics",
+    "hmetrics/onload"
+  ]
+  revision = "705849e307dd75c91728463dea5bfd08ef493e64"
+
+[[projects]]
+  branch = "master"
   name = "github.com/jtolds/qod"
   packages = ["."]
   revision = "3abb44dfc7ba8b5cdfdb634786f57e78c7004e1c"
@@ -72,6 +81,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1093308de1a240d70c57ded469d261831657f3723b930250d346fe855c6eb143"
+  inputs-digest = "ff07a7aebc24f1446240026b1f81eb36e48ad6d57dddfb83fc20d12e620ff051"
   solver-name = "gps-cdcl"
   solver-version = 1

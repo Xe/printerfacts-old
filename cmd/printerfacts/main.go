@@ -12,6 +12,7 @@ import (
 	"github.com/Xe/ln"
 	"github.com/Xe/printerfacts/proto"
 	_ "github.com/Xe/printerfacts/statik"
+	_ "github.com/heroku/x/hmetrics/onload"
 	"github.com/rakyll/statik/fs"
 )
 
