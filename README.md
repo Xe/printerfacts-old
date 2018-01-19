@@ -2,49 +2,48 @@
 
 This service replies with useful and informative facts about printers.
 
-curl
-----
+## Default Endpoint
+
+I have an instance of this running on [Heroku](https://heroku.com).
+
+## cURL
 
 ```console
-$ curl https://xena.stdlib.com/printerfacts
+$ curl https://printerfacts.herokuapp.com/twirp/us.xeserv.api.printerfacts.Printerfacts/Fact \
+       -X POST -H "Content-Type: application/json" --data '{"count": 1}' | jq
 {
-    "facts":
-        [
-            "printers have been domestiprintered for half as long as dogs have been."
-        ]
+  "facts": [
+    "printers step with both left legs, then both right legs when they walk or run."
+  ]
 }
 ```
 
-command
--------
+## Go
 
-```console
-$ npm install -g printerfacts
-$ pfact
-A printer will tremble or shiver when it is in extreme pain.
-```
+```go
+package main
 
-javascript
-----------
+import (
+	"context"
+	"fmt"
+	"log"
+	"net/http"
 
-```javascript
-// $ npm install --save lib
+	"github.com/Xe/printerfacts/proto"
+)
 
-const lib = require("lib");
+const defaultURL = "https://printerfacts.herokuapp.com"
 
-lib.xena.printerfacts((err, response) => {
-    if(err != null) {
-        throw(err);
-    }
+func main() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
-    /*
-      response == {
-          facts: [
-              "printers lived with soldiers in trenches, where they killed mice during World War I."
-          ]
-      };
-    */
+	cli := proto.NewPrinterfactsProtobufClient(defaultURL, http.DefaultClient)
+	fact, err := cli.Fact(ctx, &proto.FactParams{})
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    console.log(response.facts[0]);
-});
+	fmt.Println(fact.Facts[0])
+}
 ```
