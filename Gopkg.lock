@@ -18,6 +18,26 @@
   revision = "1e59b77b52bf8e4b449a57e6f79f21226d571845"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/jtolds/qod"
+  packages = ["."]
+  revision = "3abb44dfc7ba8b5cdfdb634786f57e78c7004e1c"
+
+[[projects]]
+  name = "github.com/magefile/mage"
+  packages = [
+    "build",
+    "mage",
+    "mg",
+    "parse",
+    "parse/srcimporter",
+    "sh",
+    "types"
+  ]
+  revision = "ab3ca2f6f85577d7ec82e0a6df721147a2e737f9"
+  version = "v2.0.1"
+
+[[projects]]
   name = "github.com/pkg/errors"
   packages = ["."]
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
@@ -39,9 +59,19 @@
   revision = "db96cdf354e8dc053e5ee5fe890bb0a7f18123ab"
   version = "v5.0.0"
 
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = [
+    "context",
+    "internal/timeseries",
+    "trace"
+  ]
+  revision = "5ccada7d0a7ba9aeb5d3aca8d3501b4c2a509fec"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "80bcc4cacc1b5a495cdf5c50a145dbc93eedbd23b098cf363597c6fb0d6d7fc4"
+  inputs-digest = "1093308de1a240d70c57ded469d261831657f3723b930250d346fe855c6eb143"
   solver-name = "gps-cdcl"
   solver-version = 1

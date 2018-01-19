@@ -1,9 +1,0 @@
-{
-  "name": "main",
-  "description": "Printer facts",
-  "args": [],
-  "kwargs": {},
-  "http": {
-    "headers": {}
-  }
-}
