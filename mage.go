@@ -42,6 +42,7 @@ func Generate() {
 
 	shouldWork(ctx, nil, wd, "statik", "-src", "./facts", "-f")
 	shouldWork(ctx, nil, filepath.Join(wd, "proto"), "sh", "./regen.sh")
+	fmt.Println("reran code generation")
 }
 
 func Build() {
@@ -56,5 +57,22 @@ func Build() {
 
 	for _, c := range cmds {
 		shouldWork(ctx, nil, outd, "go", "build", "../cmd/"+c)
+		fmt.Println("built ./bin/" + c)
 	}
+}
+
+func Docker() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	shouldWork(ctx, nil, wd, "docker", "build", "-t", "xena/printerfacts")
+}
+
+func Heroku() {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	mg.Deps(Docker)
+
+	shouldWork(ctx, nil, wd, "heroku", "container:push", "-a", "printerfacts")
 }
