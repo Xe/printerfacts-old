@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"math/rand"
+	"net"
 	"net/http"
 	"os"
 	"time"
@@ -62,11 +63,25 @@ func main() {
 	}
 
 	s := &server{facts: facts}
-	handler := proto.NewPrinterfactsServer(s, nil)
+	handler := proto.NewPrinterfactsServer(s, makeLnHooks())
 	mux := http.NewServeMux()
 
 	mux.Handle(proto.PrinterfactsPathPrefix, handler)
 
 	ln.Log(ctx, ln.F{"port": os.Getenv("PORT")}, ln.Action("Listening on http"))
-	ln.FatalErr(ctx, http.ListenAndServe(":"+os.Getenv("PORT"), mux), ln.Action("http server stopped for some reason"))
+	ln.FatalErr(ctx, http.ListenAndServe(":"+os.Getenv("PORT"), metaInfo(mux)), ln.Action("http server stopped for some reason"))
+}
+
+func metaInfo(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		host, _, _ := net.SplitHostPort(r.RemoteAddr)
+		f := ln.F{
+			"remote_ip":       host,
+			"x_forwarded_for": r.Header.Get("X-Forwarded-For"),
+			"path":            r.URL.Path,
+		}
+		ctx := ln.WithF(r.Context(), f)
+
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
 }
