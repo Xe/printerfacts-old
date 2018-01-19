@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package us.xeserv.api.printerfacts;
+option go_package = "proto";
+
+service Printerfacts {
+  rpc Fact(FactParams) returns (Facts) {};
+}
+
+message FactParams {
+  int32 count = 1;
+}
+
+message Facts {
+  repeated string facts = 1;
+}
