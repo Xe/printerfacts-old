@@ -1,6 +1,13 @@
 <title>twirp printer facts api</title>
 
-<script src="./printerfacts_twirp.js"></script>
+<script src="https://xena.greedo.xeserv.us/files/twirp_printerfacts/printerfacts_twirp.js"></script>
 <script>
-Printerfacts_fact("https://printerfacts.herokuapp.com", {"count": 1}, function(x) { document.write(x); }, function(x) { alert(x) });
+ let onSuccess = (x) => {
+     document.write(x.facts[0]);
+ };
+ let onError = (x) => {
+     console.log(x);
+ };
+
+ Printerfacts_fact("https://printerfacts.herokuapp.com", {"count": 1}, onSuccess, onError);
 </script>
