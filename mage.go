@@ -65,7 +65,7 @@ func Docker() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	shouldWork(ctx, nil, wd, "docker", "build", "-t", "xena/printerfacts")
+	shouldWork(ctx, nil, wd, "docker", "build", "-t", "xena/printerfacts", ".")
 }
 
 func Heroku() {
@@ -74,5 +74,5 @@ func Heroku() {
 
 	mg.Deps(Docker)
 
-	shouldWork(ctx, nil, wd, "heroku", "container:push", "-a", "printerfacts")
+	shouldWork(ctx, nil, wd, "heroku", "container:push", "-a", "printerfacts", "web")
 }
