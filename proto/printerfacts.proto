@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package us.xeserv.api.printerfacts;
+package us.xeserv.api;
 option go_package = "proto";
 
 service Printerfacts {
