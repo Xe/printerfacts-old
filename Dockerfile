@@ -1,5 +1,6 @@
 # image with development tools
 FROM xena/go-mini:1.9.2
+ENV GOPATH /root/go
 RUN apk --no-cache add git protobuf \
  && go download
 COPY . /root/go/src/github.com/Xe/printerfacts

@@ -5,6 +5,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -21,11 +22,12 @@ func Tools() {
 		"github.com/golang/protobuf/protoc-gen-go",
 		"github.com/twitchtv/twirp/protoc-gen-twirp",
 		"github.com/rakyll/statik",
+		"github.com/Xe/twirp-codegens/cmd/protoc-gen-twirp_jsbrowser",
 	}
 
 	for _, t := range tools {
 		fmt.Printf("installing: %s\n", t)
-		shouldWork(ctx, nil, wd, "go", "get", "-u", t)
+		shouldWork(ctx, nil, wd, "go", "get", "-u", "-v", t)
 	}
 }
 
@@ -33,8 +35,6 @@ func Tools() {
 func Generate() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
-
-	mg.Deps(Tools)
 
 	if Contained() {
 		p := os.Getenv("PATH") + ":/root/go/bin"
@@ -45,6 +45,20 @@ func Generate() {
 	shouldWork(ctx, nil, wd, "statik", "-src", "./facts", "-f")
 	shouldWork(ctx, nil, filepath.Join(wd, "proto"), "sh", "./regen.sh")
 	fmt.Println("reran code generation")
+
+	fin, err := os.Open("./proto/printerfacts_twirp.js")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer fin.Close()
+
+	fout, err := os.Create("./facts/printerfacts_twirp.js")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer fout.Close()
+
+	io.Copy(fout, fin)
 }
 
 // Build creates a binary of printerfacts and pfact in a new directory named bin
