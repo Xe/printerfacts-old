@@ -83,6 +83,7 @@ func Docker() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
+	shouldWork(ctx, nil, wd, "docker", "pull", "xena/go-mini:1.9")
 	shouldWork(ctx, nil, wd, "docker", "build", "-t", "xena/printerfacts", ".")
 }
 
@@ -91,5 +92,6 @@ func Heroku() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
+	shouldWork(ctx, nil, wd, "docker", "pull", "xena/go-mini:1.9")
 	shouldWork(ctx, nil, wd, "heroku", "container:push", "-a", "printerfacts", "web")
 }
