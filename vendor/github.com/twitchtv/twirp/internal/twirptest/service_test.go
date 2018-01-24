@@ -1,7 +1,21 @@
+// Copyright 2018 Twitch Interactive, Inc.  All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"). You may not
+// use this file except in compliance with the License. A copy of the License is
+// located at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// or in the "license" file accompanying this file. This file is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied. See the License for the specific language governing
+// permissions and limitations under the License.
+
 package twirptest
 
 import (
 	"bytes"
+	"context"
 	"crypto/tls"
 	"errors"
 	"io"
@@ -19,8 +33,6 @@ import (
 
 	"github.com/twitchtv/twirp"
 	"github.com/twitchtv/twirp/internal/descriptors"
-
-	"golang.org/x/net/context"
 )
 
 func TestServeJSON(t *testing.T) {
@@ -213,6 +225,7 @@ func recorderHooks() (*twirp.ServerHooks, *requestRecorder) {
 func TestHooks(t *testing.T) {
 	hooks, recorder := recorderHooks()
 	h := PickyHatmaker(1)
+
 	s := httptest.NewServer(NewHaberdasherServer(h, hooks))
 	defer s.Close()
 	client := NewHaberdasherProtobufClient(s.URL, http.DefaultClient)
@@ -311,6 +324,7 @@ func TestHooks(t *testing.T) {
 		rw := &reqRewriter{
 			base: http.DefaultTransport,
 			rewrite: func(r *http.Request) *http.Request {
+				r.ContentLength = 1
 				r.Body = ioutil.NopCloser(io.LimitReader(r.Body, 1))
 				return r
 			},

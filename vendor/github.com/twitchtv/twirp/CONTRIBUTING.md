@@ -18,10 +18,6 @@ If you'd like to make changes to Twirp, read on:
 You will need git, Go 1.9+, and Python 2.7 installed and on your system's path.
 Install them however you feel.
 
-We work on a branch called `develop`. We periodically release this branch as a
-new version, then accumulate more changes on the develop branch until the next
-release. Use `develop` as the base for your branches.
-
 ## Developer Loop ##
 
 Generally you want to make changes and run `make`, which will install all
@@ -33,8 +29,8 @@ of cross-language clients are in the [clientcompat](./clientcompat) directory.
 
 ## Contributing Code ##
 
-Twirp uses github pull requests. Fork a branch from `develop`, hack away at your
-changes, run the test suite with `make`, and submit a PR.
+Twirp uses github pull requests. Fork, hack away at your changes, run the test
+suite with `make`, and submit a PR.
 
 ## Releasing Versions ##
 
@@ -53,10 +49,24 @@ To make a release, remember to update the version number in
 Twirp uses Github releases. To make a new release:
  1. Merge all changes that should be included in the release into the master
     branch.
- 2. Add a new commit to master with a message like "Version vX.X.X release".
- 3. Tag the commit you just made: `git tag <version number>` and `git push
+ 2. Update the version constant in `internal/gen/version.go`.
+ 3. Add a new commit to master with a message like "Version vX.X.X release".
+ 4. Tag the commit you just made: `git tag <version number>` and `git push
     origin --tags`
- 3. Go to Github https://github.com/twitchtv/twirp/releases and
+ 5. Go to Github https://github.com/twitchtv/twirp/releases and
     "Draft a new release".
- 4. Make sure to document changes, specially when upgrade instructions are
+ 6. Make sure to document changes, specially when upgrade instructions are
     needed.
+
+
+## Code of Conduct
+This project has adopted the [Amazon Open Source Code of Conduct](https://aws.github.io/code-of-conduct).
+For more information see the [Code of Conduct FAQ](https://aws.github.io/code-of-conduct-faq) or contact
+opensource-codeofconduct@amazon.com with any additional questions or comments.
+
+
+## Licensing
+
+See the [LICENSE](https://github.com/twitchtv/twirp/blob/master/LICENSE) file for our project's licensing. We will ask you to confirm the licensing of your contribution.
+
+We may ask you to sign a [Contributor License Agreement (CLA)](http://en.wikipedia.org/wiki/Contributor_License_Agreement) for larger changes.

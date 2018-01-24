@@ -15,7 +15,7 @@
     "proto",
     "ptypes/struct"
   ]
-  revision = "1e59b77b52bf8e4b449a57e6f79f21226d571845"
+  revision = "c65a0412e71e8b9b3bfd22925720d23c0f054237"
 
 [[projects]]
   branch = "master"
@@ -65,8 +65,8 @@
     "ctxsetters",
     "internal/contextkeys"
   ]
-  revision = "db96cdf354e8dc053e5ee5fe890bb0a7f18123ab"
-  version = "v5.0.0"
+  revision = "dff337b186d4ea1ada1d1e54ef422fdbcfa3113d"
+  version = "v5.1.0"
 
 [[projects]]
   branch = "master"
@@ -76,7 +76,7 @@
     "internal/timeseries",
     "trace"
   ]
-  revision = "5ccada7d0a7ba9aeb5d3aca8d3501b4c2a509fec"
+  revision = "0ed95abb35c445290478a5348a7b38bb154135fd"
 
 [solve-meta]
   analyzer-name = "dep"

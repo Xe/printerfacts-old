@@ -1,4 +1,17 @@
-// package twirp provides core types used in generated Twirp servers and client.
+// Copyright 2018 Twitch Interactive, Inc.  All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License"). You may not
+// use this file except in compliance with the License. A copy of the License is
+// located at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// or in the "license" file accompanying this file. This file is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+// express or implied. See the License for the specific language governing
+// permissions and limitations under the License.
+
+// Package twirp provides core types used in generated Twirp servers and client.
 //
 // Twirp services handle errors using the `twirp.Error` interface.
 //
@@ -85,7 +98,7 @@ func InvalidArgumentError(argument string, validationMsg string) Error {
 	return err
 }
 
-// RequiredArgumentError is a more scpecific constructor for InvalidArgument
+// RequiredArgumentError is a more specific constructor for InvalidArgument
 // error. Should be used when the argument is required (expected to have a
 // non-zero value).
 func RequiredArgumentError(argument string) Error {
@@ -122,7 +135,7 @@ func InternalErrorWith(err error) Error {
 // ErrorCode represents a Twirp error type.
 type ErrorCode string
 
-// Valid Twirp error types. Most error types are equivalent to GRPC status codes
+// Valid Twirp error types. Most error types are equivalent to gRPC status codes
 // and follow the same semantics.
 const (
 	// Canceled indicates the operation was cancelled (typically by the caller).
