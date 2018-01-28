@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/Xe/ln"
-	"github.com/Xe/printerfacts/proto"
+	"github.com/Xe/printerfacts/rpc/printerfacts"
 	_ "github.com/Xe/printerfacts/statik"
 	_ "github.com/heroku/x/hmetrics/onload"
 	"github.com/rakyll/statik/fs"
@@ -29,8 +29,8 @@ type server struct {
 }
 
 // Fact grabs a random set of printer facts and returns them to the user.
-func (s *server) Fact(ctx context.Context, prm *proto.FactParams) (*proto.Facts, error) {
-	result := &proto.Facts{}
+func (s *server) Fact(ctx context.Context, prm *printerfacts.FactParams) (*printerfacts.Facts, error) {
+	result := &printerfacts.Facts{}
 
 	if prm.Count == 0 {
 		prm.Count = 1
@@ -64,10 +64,10 @@ func main() {
 	}
 
 	s := &server{facts: facts}
-	handler := proto.NewPrinterfactsServer(s, makeLnHooks())
+	handler := printerfacts.NewPrinterfactsServer(s, makeLnHooks())
 	mux := http.NewServeMux()
 
-	mux.Handle(proto.PrinterfactsPathPrefix, handler)
+	mux.Handle(printerfacts.PrinterfactsPathPrefix, handler)
 	mux.Handle("/", http.FileServer(sfs))
 
 	ln.Log(ctx, ln.F{"port": os.Getenv("PORT")}, ln.Action("Listening on http"))

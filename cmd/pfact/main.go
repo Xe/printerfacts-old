@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/Xe/ln"
-	"github.com/Xe/printerfacts/proto"
+	proto "github.com/Xe/printerfacts/rpc/printerfacts"
 )
 
 const defaultURL = "https://printerfacts.herokuapp.com"

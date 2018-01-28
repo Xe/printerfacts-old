@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package us.xeserv.api;
+option go_package = "printerfacts";
+
+// Printerfacts manages amusing facts about printers.
+service Printerfacts {
+  // Fact gives the client one or more facts about printers.
+  rpc Fact(FactParams) returns (Facts) {};
+}
+
+// FactParams stores paramaters about what printer facts a user wants.
+message FactParams {
+  // count is the number of facts to return.
+  int32 count = 1;
+}
+
+// Facts is the resulting list of printer facts.
+message Facts {
+  // facts is the individual string facts about printers.
+  repeated string facts = 1;
+}

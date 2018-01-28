@@ -1,11 +1,12 @@
 # image with development tools
-FROM xena/go-mini:1.9
+FROM xena/go-mini:1.9.3
 ENV GOPATH /root/go
-RUN apk --no-cache add git protobuf \
+RUN apk --no-cache add git protobuf retool \
  && go download
 COPY . /root/go/src/github.com/Xe/printerfacts
 WORKDIR /root/go/src/github.com/Xe/printerfacts
-RUN go run ./cmd/mage/main.go -v tools generate build
+RUN retool sync && retool build \
+ && retool do mage -v generate build
 
 # runner image
 FROM xena/alpine
