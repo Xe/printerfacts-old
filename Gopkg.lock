@@ -35,12 +35,7 @@
 [[projects]]
   name = "github.com/magefile/mage"
   packages = [
-    "build",
-    "mage",
     "mg",
-    "parse",
-    "parse/srcimporter",
-    "sh",
     "types"
   ]
   revision = "ab3ca2f6f85577d7ec82e0a6df721147a2e737f9"
@@ -81,6 +76,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ff07a7aebc24f1446240026b1f81eb36e48ad6d57dddfb83fc20d12e620ff051"
+  inputs-digest = "ac0cb1c9fb6b47d8c78d4d07d75dc9e0506a24659dea11d6c29a05746e9653be"
   solver-name = "gps-cdcl"
   solver-version = 1
