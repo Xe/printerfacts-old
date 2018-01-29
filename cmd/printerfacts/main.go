@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/Xe/ln"
+	"github.com/Xe/printerfacts/internal/printerfactsserver"
 	"github.com/Xe/printerfacts/rpc/printerfacts"
 	_ "github.com/Xe/printerfacts/statik"
 	_ "github.com/heroku/x/hmetrics/onload"
@@ -22,25 +23,6 @@ func init() {
 	if p := os.Getenv("PORT"); p == "" {
 		os.Setenv("PORT", "9001")
 	}
-}
-
-type server struct {
-	facts []string
-}
-
-// Fact grabs a random set of printer facts and returns them to the user.
-func (s *server) Fact(ctx context.Context, prm *printerfacts.FactParams) (*printerfacts.Facts, error) {
-	result := &printerfacts.Facts{}
-
-	if prm.Count == 0 {
-		prm.Count = 1
-	}
-
-	for range make([]struct{}, prm.Count) {
-		result.Facts = append(result.Facts, s.facts[rand.Intn(len(s.facts))])
-	}
-
-	return result, nil
 }
 
 func main() {
@@ -63,7 +45,7 @@ func main() {
 		ln.FatalErr(ctx, err, ln.Action("can't read facts as json"))
 	}
 
-	s := &server{facts: facts}
+	s := printerfactsserver.Impl{Facts: facts}
 	handler := printerfacts.NewPrinterfactsServer(s, makeLnHooks())
 	mux := http.NewServeMux()
 
