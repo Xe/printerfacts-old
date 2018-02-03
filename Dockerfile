@@ -1,8 +1,7 @@
 # image with development tools
-FROM xena/go-mini:1.9.3
+FROM xena/go:1.9.3
 ENV GOPATH /root/go
-RUN apk --no-cache add git protobuf retool \
- && go download
+RUN apk --no-cache add git protobuf retool
 COPY . /root/go/src/github.com/Xe/printerfacts
 WORKDIR /root/go/src/github.com/Xe/printerfacts
 RUN retool sync && retool build \

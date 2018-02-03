@@ -45,7 +45,7 @@ func main() {
 		ln.FatalErr(ctx, err, ln.Action("can't read facts as json"))
 	}
 
-	s := printerfactsserver.Impl{Facts: facts}
+	s := &printerfactsserver.Impl{Facts: facts}
 	handler := printerfacts.NewPrinterfactsServer(s, makeLnHooks())
 	mux := http.NewServeMux()
 
