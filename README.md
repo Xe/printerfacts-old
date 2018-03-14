@@ -9,7 +9,7 @@ I have an instance of this running on [Heroku](https://heroku.com).
 ## cURL
 
 ```console
-$ curl https://printerfacts.herokuapp.com/twirp/us.xeserv.api.printerfacts.Printerfacts/Fact \
+$ curl https://printerfacts.herokuapp.com/twirp/us.xeserv.api.Printerfacts/Fact \
        -X POST -H "Content-Type: application/json" --data '{"count": 1}' | jq
 {
   "facts": [
