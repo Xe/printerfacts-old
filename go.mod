@@ -13,6 +13,7 @@ require (
 	github.com/golang/protobuf v1.1.0
 	github.com/heroku/x v0.0.0-20180719221634-1de401e1ba0e
 	github.com/influxdata/influxdb v1.6.1 // indirect
+	github.com/kr/logfmt v0.0.0-20140226030751-b84e30acd515 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/prometheus/client_golang v0.8.0 // indirect
 	github.com/prometheus/client_model v0.0.0-20180712105110-5c3871d89910 // indirect
