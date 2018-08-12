@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"expvar"
 	"math/rand"
 	"net"
 	"net/http"
@@ -13,6 +14,7 @@ import (
 	"github.com/Xe/printerfacts/internal/printerfactsserver"
 	"github.com/Xe/printerfacts/rpc/printerfacts"
 	_ "github.com/Xe/printerfacts/statik"
+	"github.com/go-kit/kit/metrics/provider"
 	_ "github.com/heroku/x/hmetrics/onload"
 	"github.com/rakyll/statik/fs"
 )
@@ -46,11 +48,15 @@ func main() {
 	}
 
 	s := &printerfactsserver.Impl{Facts: facts}
-	handler := printerfacts.NewPrinterfactsServer(printerfacts.NewPrinterfactsLogging(s), nil)
+	handler := printerfacts.NewPrinterfactsServer(
+		printerfacts.NewPrinterfactsLogging(
+			printerfacts.NewPrinterfactsMetrics(s, provider.NewExpvarProvider()),
+		), nil)
 	mux := http.NewServeMux()
 
 	mux.Handle(printerfacts.PrinterfactsPathPrefix, handler)
 	mux.Handle("/", http.FileServer(sfs))
+	mux.Handle("/metrics", expvar.Handler())
 
 	ln.Log(ctx, ln.F{"port": os.Getenv("PORT")}, ln.Action("Listening on http"))
 	ln.FatalErr(ctx, http.ListenAndServe(":"+os.Getenv("PORT"), metaInfo(mux)), ln.Action("http server stopped for some reason"))
