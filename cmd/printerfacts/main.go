@@ -46,7 +46,7 @@ func main() {
 	}
 
 	s := &printerfactsserver.Impl{Facts: facts}
-	handler := printerfacts.NewPrinterfactsServer(s, makeLnHooks())
+	handler := printerfacts.NewPrinterfactsServer(printerfacts.NewPrinterfactsLogging(s), nil)
 	mux := http.NewServeMux()
 
 	mux.Handle(printerfacts.PrinterfactsPathPrefix, handler)
