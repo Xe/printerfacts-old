@@ -10,6 +10,7 @@ import (
 	"os"
 	"time"
 
+	"gopkg.in/segmentio/analytics-go.v3"
 	"github.com/Xe/ln"
 	"github.com/Xe/printerfacts/internal/printerfactsserver"
 	"github.com/Xe/printerfacts/rpc/printerfacts"
@@ -50,7 +51,10 @@ func main() {
 	s := &printerfactsserver.Impl{Facts: facts}
 	handler := printerfacts.NewPrinterfactsServer(
 		printerfacts.NewPrinterfactsLogging(
-			printerfacts.NewPrinterfactsMetrics(s, provider.NewExpvarProvider()),
+			printerfacts.NewPrinterfactsMetrics(printerfacts.NewPrinterfactsAnalytics(
+				s,
+				analytics.New(os.Getenv("SEGMENT_WRITE_KEY")),
+			), provider.NewExpvarProvider()),
 		), nil)
 	mux := http.NewServeMux()
 

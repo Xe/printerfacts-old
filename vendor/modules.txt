@@ -56,11 +56,17 @@ github.com/prometheus/procfs/xfs
 github.com/prometheus/procfs/internal/util
 # github.com/rakyll/statik v0.1.3
 github.com/rakyll/statik/fs
+# github.com/segmentio/backo-go v0.0.0-20160424052352-204274ad699c
+github.com/segmentio/backo-go
 # github.com/twitchtv/twirp v5.4.2+incompatible
 github.com/twitchtv/twirp
 github.com/twitchtv/twirp/ctxsetters
 github.com/twitchtv/twirp/internal/contextkeys
+# github.com/xtgo/uuid v0.0.0-20140804021211-a0b114877d4c
+github.com/xtgo/uuid
 # golang.org/x/net v0.0.0-20180811021610-c39426892332
 golang.org/x/net/trace
 golang.org/x/net/context
 golang.org/x/net/internal/timeseries
+# gopkg.in/segmentio/analytics-go.v3 v3.0.0-20180814014620-14e03163be03
+gopkg.in/segmentio/analytics-go.v3

@@ -31,7 +31,7 @@ func (m *FactParams) Reset()         { *m = FactParams{} }
 func (m *FactParams) String() string { return proto.CompactTextString(m) }
 func (*FactParams) ProtoMessage()    {}
 func (*FactParams) Descriptor() ([]byte, []int) {
-	return fileDescriptor_printerfacts_85f68208bf863c54, []int{0}
+	return fileDescriptor_printerfacts_dd672c66bcfac388, []int{0}
 }
 func (m *FactParams) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_FactParams.Unmarshal(m, b)
@@ -71,7 +71,7 @@ func (m *Facts) Reset()         { *m = Facts{} }
 func (m *Facts) String() string { return proto.CompactTextString(m) }
 func (*Facts) ProtoMessage()    {}
 func (*Facts) Descriptor() ([]byte, []int) {
-	return fileDescriptor_printerfacts_85f68208bf863c54, []int{1}
+	return fileDescriptor_printerfacts_dd672c66bcfac388, []int{1}
 }
 func (m *Facts) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_Facts.Unmarshal(m, b)
@@ -103,9 +103,9 @@ func init() {
 	proto.RegisterType((*Facts)(nil), "us.xeserv.api.Facts")
 }
 
-func init() { proto.RegisterFile("printerfacts.proto", fileDescriptor_printerfacts_85f68208bf863c54) }
+func init() { proto.RegisterFile("printerfacts.proto", fileDescriptor_printerfacts_dd672c66bcfac388) }
 
-var fileDescriptor_printerfacts_85f68208bf863c54 = []byte{
+var fileDescriptor_printerfacts_dd672c66bcfac388 = []byte{
 	// 150 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2a, 0x28, 0xca, 0xcc,
 	0x2b, 0x49, 0x2d, 0x4a, 0x4b, 0x4c, 0x2e, 0x29, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2,

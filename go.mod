@@ -20,7 +20,10 @@ require (
 	github.com/prometheus/common v0.0.0-20180801064454-c7de2306084e // indirect
 	github.com/prometheus/procfs v0.0.0-20180725123919-05ee40e3a273 // indirect
 	github.com/rakyll/statik v0.1.3
+	github.com/segmentio/backo-go v0.0.0-20160424052352-204274ad699c // indirect
 	github.com/twitchtv/twirp v5.4.2+incompatible
+	github.com/xtgo/uuid v0.0.0-20140804021211-a0b114877d4c // indirect
 	golang.org/x/net v0.0.0-20180811021610-c39426892332
 	golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f // indirect
+	gopkg.in/segmentio/analytics-go.v3 v3.0.0-20180814014620-14e03163be03
 )

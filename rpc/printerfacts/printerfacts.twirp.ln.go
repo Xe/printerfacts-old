@@ -27,8 +27,6 @@ func (i PrinterfactsLogging) Fact(ctx context.Context, input *FactParams) (resul
 	result, err = i.next.Fact(ctx, input)
 	if err != nil {
 		ln.Error(ctx, err)
-	} else {
-		ln.Log(ctx)
 	}
 	return
 }
