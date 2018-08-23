@@ -23,10 +23,9 @@ func (i PrinterfactsLogging) Fact(ctx context.Context, input *FactParams) (resul
 		"twirp_service": "Printerfacts",
 		"twirp_method": "Fact",
 	})
-	ctx = ln.WithF(ctx, input.F())
 	result, err = i.next.Fact(ctx, input)
 	if err != nil {
-		ln.Error(ctx, err)
+		ln.Error(ctx, err, input)
 	}
 	return
 }

@@ -4,6 +4,7 @@
 package printerfacts
 
 import "context"
+import "github.com/Xe/ln"
 import "gopkg.in/segmentio/analytics-go.v3"
 
 // PrinterfactsAnalytics is a middleware for Printerfacts that collects timing and error rate data for servers.
@@ -21,12 +22,16 @@ func NewPrinterfactsAnalytics(next Printerfacts, client analytics.Client) Printe
 
 func (i PrinterfactsAnalytics) Fact(ctx context.Context, input *FactParams) (result *Facts, err error) {
 	var track analytics.Track
-	track.Event = "PrinterfactsAnalytics Fact"
+	track.Event = "Printerfacts Fact"
+	track.UserId = `filthy casuals`
 	defer func() {
 		if err != nil {
 			track.Event += " Error"
 		}
-		i.client.Enqueue(track)
+		err = i.client.Enqueue(track)
+		if err != nil {
+			ln.Error(ctx, err)
+		}
 	}()
 
 	result, err = i.Next.Fact(ctx, input)
