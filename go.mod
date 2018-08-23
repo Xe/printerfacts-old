@@ -1,3 +1,6 @@
+// +heroku goVersion 1.11
+// +heroku install ./cmd/...
+
 module github.com/Xe/printerfacts
 
 require (
