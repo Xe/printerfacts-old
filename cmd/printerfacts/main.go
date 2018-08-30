@@ -4,20 +4,22 @@ import (
 	"context"
 	"encoding/json"
 	"expvar"
+	"log"
 	"math/rand"
 	"net"
 	"net/http"
 	"os"
 	"time"
 
-	"gopkg.in/segmentio/analytics-go.v3"
 	"github.com/Xe/ln"
+	"github.com/Xe/ln/opname"
 	"github.com/Xe/printerfacts/internal/printerfactsserver"
 	"github.com/Xe/printerfacts/rpc/printerfacts"
 	_ "github.com/Xe/printerfacts/statik"
 	"github.com/go-kit/kit/metrics/provider"
-	_ "github.com/heroku/x/hmetrics/onload"
+	"github.com/heroku/x/hmetrics"
 	"github.com/rakyll/statik/fs"
+	"gopkg.in/segmentio/analytics-go.v3"
 )
 
 func init() {
@@ -29,7 +31,19 @@ func init() {
 }
 
 func main() {
-	ctx := context.Background()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	ctx = opname.With(ctx, "main")
+	go func() {
+		if err := hmetrics.Report(ctx, hmetrics.DefaultEndpoint, func(err error) error {
+			ln.Error(opname.With(ctx, "hmetricsReportError"), err)
+			return nil
+		}); err != nil {
+			ln.FatalErr(opname.With(ctx, "hmetricsStart"), err)
+			log.Fatal("Error starting hmetrics reporting:", err)
+		}
+	}()
 
 	sfs, err := fs.New()
 	if err != nil {
