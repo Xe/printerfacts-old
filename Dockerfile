@@ -8,6 +8,6 @@ ENV CGO_ENABLED 0
 RUN ./scripts/generate.sh && ./scripts/build.sh
 
 # runner image
-FROM alpine:edge
+FROM xena/alpine
 COPY --from=build /root/go/src/github.com/Xe/printerfacts/bin/printerfacts /printerfacts
 CMD /printerfacts

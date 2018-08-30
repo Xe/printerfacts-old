@@ -29,7 +29,6 @@ github.com/golang/protobuf/jsonpb
 github.com/golang/protobuf/proto
 github.com/golang/protobuf/ptypes/struct
 # github.com/heroku/x v0.0.0-20180719221634-1de401e1ba0e
-github.com/heroku/x/hmetrics/onload
 github.com/heroku/x/hmetrics
 # github.com/influxdata/influxdb v1.6.1
 github.com/influxdata/influxdb/client/v2
