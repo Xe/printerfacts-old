@@ -1,5 +1,7 @@
 # `printerfacts`
 
+# EDIT: This is replaced with [the new implementation in Rust](https://github.com/Xe/printerfacts). Sorry.
+
 This service replies with useful and informative facts about printers.
 
 ## Default Endpoint
